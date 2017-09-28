@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchPost } from '../actions/index';
 
 class PostsShow extends Component {
+  componentDidMount() {
+    this.props.fetchPost(this.props.match.params.id);
+  }
+
   render() {
     const { post } = this.props;
-    // const post = this.props.post;
 
     if (!post) {
       return <p>Loading...</p>;
@@ -31,4 +36,8 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(PostsShow);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchPost }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostsShow);

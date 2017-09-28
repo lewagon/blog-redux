@@ -1,10 +1,15 @@
 import _ from 'lodash';
-import { FETCH_POSTS } from '../actions';
+import { FETCH_POSTS, FETCH_POST } from '../actions';
 
 export default function postsReducer(state = {}, action) {
+  const { payload } = action;
   switch (action.type) {
     case FETCH_POSTS:
-      return _.mapKeys(action.payload, 'id');
+      return _.mapKeys(payload, 'id');
+    case FETCH_POST:
+      return {
+        [payload.id]: payload
+      };
     default:
       return state;
   }
