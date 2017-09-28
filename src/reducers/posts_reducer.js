@@ -1,19 +1,20 @@
-import _ from 'lodash';
 import { FETCH_POSTS, FETCH_POST } from '../actions';
 
-export default function postsReducer(state = {}, action) {
+export default function postsReducer(state = [], action) {
   const { payload, type } = action;
   switch (type) {
     case FETCH_POSTS:
-      return _.mapKeys(payload, 'id');
+      return payload;
     case FETCH_POST:
-      return {
-        [payload.id]: payload
-      };
+            const posts = state.splice(0);
+      const index = posts.findIndex((post) => post.id === payload.id);
+      if (index === -1) {
+        posts.push(payload);
+      } else {
+        posts.splice(index, 1, payload);
+      }
+      return posts;
     default:
       return state;
   }
 }
-
-// [{ id: 147569, ... }, {...}]
-// { 147569: { id: 147569, ... }, {...}}
