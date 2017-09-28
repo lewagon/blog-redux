@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import _ from 'lodash';
 import { fetchPosts } from '../actions/index';
 
 class PostsIndex extends Component {
@@ -11,7 +10,7 @@ class PostsIndex extends Component {
   }
 
   renderPosts = () => {
-    return _.map(this.props.posts, (post) => {
+    return this.props.posts.map((post) => {
       return (
         <Link to={`/posts/${post.id}`} key={post.id}>
           <div className="post-item">
