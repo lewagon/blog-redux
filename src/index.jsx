@@ -6,30 +6,32 @@ import reduxPromise from 'redux-promise';
 import logger from 'redux-logger';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createHistory as history } from 'history';
+import { reducer as formReducer } from 'redux-form';
 
-import Home from './components/home';
-import About from './components/about';
 import '../assets/stylesheets/application.scss';
-
-// State and reducers
-const initialState = {
-  changeMe: null
-};
+import postsReducer from './reducers/posts_reducer';
+import PostsIndex from './containers/posts_index';
+import PostsShow from './containers/posts_show';
+import PostsNew from './containers/posts_new';
 
 const reducers = combineReducers({
-  changeMe: (state = null, action) => state
+  posts: postsReducer,
+  form: formReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise, logger);
 
 // render an instance of the component in the DOM
 ReactDOM.render(
-  <Provider store={createStore(reducers, initialState, middlewares)}>
+  <Provider store={createStore(reducers, {}, middlewares)}>
     <Router history={history}>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/about" exact component={About} />
-      </Switch>
+      <div className="thin-container">
+        <Switch>
+          <Route path="/" exact component={PostsIndex} />
+          <Route path="/posts/new" component={PostsNew} />
+          <Route path="/posts/:id" component={PostsShow} />
+        </Switch>
+      </div>
     </Router>
   </Provider>,
   document.querySelector('.container')

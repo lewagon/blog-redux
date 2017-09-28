@@ -1,4 +1,94 @@
-.app {
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:100,300|Yeseva+One');
+
+body {
+  background-color: #F4F4F4;
+  font-family: 'Open Sans';
+}
+
+.container {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.thin-container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.post-item {
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+h3 {
+  margin-top: 0;
+  font-family: 'Yeseva One';
+}
+
+a,
+a:hover,
+a:focus {
+  color: #363636;
+  text-decoration: none;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-cta {
+  background-color: #2A2A2A;
+  &:hover {
+    background-color: black;
+  }
+  border: none;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.form-control,
+.form-control:focus,
+.form-control:active,
+.form-control:active:focus {
+  border-color: white;
+  box-shadow: none;
+  outline: none !important;
+}
+
+.form-control {
+  border-radius: 0;
+  height: 54px;
+}
+
+input.form-control {
+  font-size: 22px;
+  font-family: 'Yeseva One';
+}
+
+textarea {
+  resize: none;
+  margin-bottom: 10px;
+}
+
+form a {
+  margin-left: 10px;
+}
+
+.first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ACACAC;
+  margin-bottom: 10px;
+  h3 {
+    margin-bottom: 0;
+  }
 }
