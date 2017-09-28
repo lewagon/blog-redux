@@ -1,8 +1,8 @@
 import { FETCH_POSTS, FETCH_POST } from '../actions';
 
 export default function postsReducer(state = [], action) {
-  const { payload } = action;
-  switch (action.type) {
+  const { payload, type } = action;
+  switch (type) {
     case FETCH_POSTS:
       return payload;
     case FETCH_POST:
