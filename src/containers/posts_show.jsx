@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPost } from '../actions/index';
+import { connect } from 'react-redux';
+
+import { fetchPost } from '../actions';
 
 class PostsShow extends Component {
-  componentDidMount() {
-    this.props.fetchPost(this.props.match.params.id);
+  componentWillMount() {
+    // CHECK IF POST NOT ALREADY THERE?
+    if (!this.props.post) {
+      this.props.fetchPost(this.props.match.params.id);
+    }
   }
 
   render() {
-    const { post } = this.props;
-
-    if (!post) {
+    if (!this.props.post) {
       return <p>Loading...</p>;
     }
 
     return (
       <div>
         <div className="post-item">
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
+          <h3>{this.props.post.title}</h3>
+          <p>{this.props.post.content}</p>
         </div>
         <Link to="/">
           Back
@@ -31,13 +33,18 @@ class PostsShow extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return {
-    post: state.posts.find((post) => post.id === parseInt(ownProps.match.params.id))
-  };
+  const idFromUrl = parseInt(ownProps.match.params.id, 10);
+  const post = state.posts.find(p => p.id === idFromUrl);
+  return { post };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost }, dispatch);
+return bindActionCreators({ fetchPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsShow);
+
+
+
+
+

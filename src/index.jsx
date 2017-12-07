@@ -8,11 +8,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createHistory as history } from 'history';
 import { reducer as formReducer } from 'redux-form';
 
-import '../assets/stylesheets/application.scss';
-import postsReducer from './reducers/posts_reducer';
 import PostsIndex from './containers/posts_index';
 import PostsShow from './containers/posts_show';
 import PostsNew from './containers/posts_new';
+
+import '../assets/stylesheets/application.scss';
+import postsReducer from './reducers/posts_reducer';
+
 
 const reducers = combineReducers({
   posts: postsReducer,
@@ -28,11 +30,11 @@ ReactDOM.render(
       <div className="thin-container">
         <Switch>
           <Route path="/" exact component={PostsIndex} />
-          <Route path="/posts/new" component={PostsNew} />
+          <Route path="/posts/new" exact component={PostsNew} />
           <Route path="/posts/:id" component={PostsShow} />
         </Switch>
       </div>
     </Router>
   </Provider>,
-  document.querySelector('.container')
+  document.getElementById('root')
 );

@@ -6,7 +6,7 @@ import { createPost } from '../actions';
 class PostsNew extends Component {
   onSubmit = (values) => {
     this.props.createPost(values, (post) => {
-      this.props.history.push('/');
+      this.props.history.push('/'); // Navigate after submit
       return post;
     });
   }
@@ -51,9 +51,9 @@ class PostsNew extends Component {
   }
 }
 
-
-export default reduxForm({
-  form: 'newPostForm' // a unique identifier
-})(
+export default reduxForm({ form: 'newPostForm' })(
   connect(null, { createPost })(PostsNew)
 );
+
+
+

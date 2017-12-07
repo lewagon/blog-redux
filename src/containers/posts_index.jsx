@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPosts } from '../actions/index';
+import { connect } from 'react-redux';
+
+import { fetchPosts } from '../actions';
 
 class PostsIndex extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPosts();
   }
 
-  renderPosts = () => {
+  renderPosts() {
     return this.props.posts.map((post) => {
       return (
         <Link to={`/posts/${post.id}`} key={post.id}>
@@ -17,8 +18,7 @@ class PostsIndex extends Component {
             <h3>{post.title}</h3>
             <p>{post.content}</p>
           </div>
-        </Link>
-      );
+        </Link>);
     });
   }
 
@@ -31,7 +31,7 @@ class PostsIndex extends Component {
             Let's write a post!
           </Link>
         </div>
-        {this.renderPosts().reverse()}
+        {this.renderPosts()}
       </div>
     );
   }
@@ -40,7 +40,7 @@ class PostsIndex extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
